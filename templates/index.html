@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX to PNG Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        label, input[type="number"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        textarea, input[type="color"] {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .generated-image {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            display: inline-block;
+            width: 49%;
+            vertical-align: top;
+        }
+        .input-group label {
+            display: block;
+        }
+        .input-group input {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .generated-image {
+        text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>LaTeX to PNG Converter</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="latex_code">LaTeX Code:</label>
+        <textarea name="latex_code" id="latex_code" rows="4" cols="50" required></textarea>
+        
+        <!-- Wrap the color and font size inputs in divs with the input-group class -->
+        <div class="input-group">
+            <label for="text_color">Text Color:</label>
+            <input type="color" id="text_color" name="text_color" value="#000000">
+        </div>
+        <div class="input-group">
+            <label for="font_size">Font Size:</label>
+            <input type="number" id="font_size" name="font_size" value="12" min="1">
+        </div>
+        <div class="input-group">
+            <label for="dpi">DPI:</label>
+            <input type="number" id="dpi" name="dpi" value="300" min="300">
+        </div>
+        
+        <input type="submit" value="Convert">
+    </form>
+    {% if image_data %}
+        <div class="generated-image">
+            <h2>Generated Image:</h2>
+            <img src="data:image/png;base64,{{ image_data }}" alt="LaTeX Image" style='height: 100%; width: 100%; object-fit: contain'>
+        </div>
+    {% endif %}
+</body>
+</html>
